@@ -7,7 +7,7 @@ const Navbar = () => {
     <header>
         <div className={`container ${css.container}`}>
             <Link to='/'>
-                <p>IQRO.uz</p>
+                <p>LOGO</p>
             </Link>
 
             <input type="checkbox" id='checkbox' />
