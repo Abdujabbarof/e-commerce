@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <>
-      {/* <section className={styles.categories} id='mahsulotlarimiz'>
+      <section className={styles.categories} id='mahsulotlarimiz'>
         <div className={`container ${styles.container}`}>
           <Input placeholder='Qidiruv...' size='large' className={styles.search} allowClear prefix={<SearchOutlined />} />
           <div className={styles.cards}>
@@ -93,7 +93,7 @@ const Home = () => {
             <Button text="Jo'natish" type='secondary' radius event='submit' />
           </Form>
         </div>
-      </section> */}
+      </section>
 
       <section className={styles.about}>
         <div className={`container ${styles.container}`}>
