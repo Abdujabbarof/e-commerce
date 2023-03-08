@@ -1,29 +1,103 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import Button from '../../components/Button'
 import styles from './home.module.scss'
 import Card from '../../components/Card'
 import { useGetData } from '../../utils/getDatas'
-import { Form, Input } from 'antd'
+import { Form, Input, message } from 'antd'
 import { Link } from 'react-router-dom'
 import { SearchOutlined } from '@ant-design/icons'
+import { useSearchParams } from 'react-router-dom'
+import { instance } from '../../utils/AxiosInstance'
+import Loading from '../Loading'
+import { useMutation } from 'react-query'
+import parse from 'html-react-parser';
+
 const {TextArea} = Input
 
 const Home = () => {
-  const query2 = useGetData(['cards'], 'products')
+  const [searchParams, setSearchParam] = useSearchParams({})
+  const query1 = useGetData(['lists'], 'category')?.data?.data?.data
+  const query2 = useGetData(['infos'], 'information')?.data?.data?.data
+  const params = searchParams.get("category")
+  const [data, setData] = useState([])
+  const [isloading, setIsloading] = useState(true)
+  const [messageApi, contextHolder] = message.useMessage();
+  const [ form ] = Form.useForm()
+
+  const [search, setSearch] = useState('')
+  const [filtered, setFiltered] = useState([])
+
+  const setParam = (e) => {
+    setSearchParam({category: e.target.getAttribute('value').toLowerCase()});
+  }
+
+  useEffect(() => {
+    instance.get(params ? `products/category/${params}` : 'products')
+    .then(data => {
+      setIsloading(false)
+      setData(data.data.data)
+    })
+  }, [params])
+
+  useEffect(() => {
+    setFiltered(data?.filter(item => item.name_Uz.toLowerCase().includes(search.toLowerCase())))
+  }, [search, data])
+  
+  const mutation = useMutation((data) => instance.post('message', data))
+
+  function submitted() {
+    messageApi.open({
+      type: 'success',
+      content: "Muvaffaqiyatli jo'natildi!",
+    });
+
+    form.resetFields()
+  }
 
   const handleSubmit = (data) => {
-    console.log(data);
+    mutation.mutate({...data, status: 'PENDING'}, {
+      onSuccess: () => submitted()
+    })
+  }
+
+  if(isloading ) {
+    return <Loading />
   }
 
   return (
     <>
-      <section className={styles.categories} id='mahsulotlarimiz'>
+      {contextHolder}
+      {/* <section className={styles.categories} id='mahsulotlarimiz'>
         <div className={`container ${styles.container}`}>
           <Input placeholder='Qidiruv...' size='large' className={styles.search} allowClear prefix={<SearchOutlined />} />
           <div className={styles.cards}>
             {
               query2.data?.data?.data.map(data => (
                 <Card key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={data.photoId} />
+              ))
+            }
+          </div>
+        </div>
+      </section> */}
+
+      <section className={styles.categories} id='mahsulotlarimiz'>
+        <div className={`container ${styles.container}`}>
+          <Input placeholder='Qidiruv...' value={search} onChange={(e) => setSearch(e.target.value)} size='large' className={styles.search} allowClear prefix={<SearchOutlined />} />
+          
+          <h1 className={styles.title}>Kategoriyalar</h1>
+          <div className={styles.wrap}>
+            <div className={styles.link}>
+              <Button border='silver' text='Barchasi' onClick={() => setSearchParam({})} className={`${styles.btn}`}>Barchasi</Button>
+              {
+                query1?.map(item => <Button text={item.name_Uz} value={item.id} key={item.id} onClick={setParam} className={styles.links} border='silver' />)
+              }
+            </div>
+          </div>
+
+          <div className={styles.cards}>
+            {
+              filtered?.map(data => (
+                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={data.photoId} />
               ))
             }
           </div>
@@ -40,13 +114,15 @@ const Home = () => {
             </div>
 
             <div className={styles.info}>
-              <Link to='tel:+998946616172'><i class="fa-solid fa-phone"></i> +998946616172</Link>
-              <Link to='mailto:abdujabborov6172@gmail.com'><i class="fa-solid fa-envelope"></i> abdujabborov6172@gmail.com</Link>
+              <Link><i class="fa-solid fa-location-dot"></i> {query2[0]?.address}</Link>
+              <Link to={`tel:${query2[0]?.phone[0]}`}><i class="fa-solid fa-phone"></i> {query2[0]?.phone[0]}</Link>
+              <Link to={`mailto:${query2[0]?.email}`}><i class="fa-solid fa-envelope"></i>{query2[0]?.email}</Link>
             </div>
+
           </div>
 
-          <Form className={styles.form} onFinish={handleSubmit}>
-            <Form.Item label='RAQAMINGIZ' name='number' labelCol={{span: 24}} wrapperCol={{span: 24}} 
+          <Form form={form} className={styles.form} onFinish={handleSubmit}>
+            <Form.Item label='RAQAMINGIZ' name='phone' labelCol={{span: 24}} wrapperCol={{span: 24}} 
             rules={[
               {
                 required: true,
@@ -92,6 +168,8 @@ const Home = () => {
  
             <Button text="Jo'natish" type='secondary' radius event='submit' />
           </Form>
+
+          {parse(query2[0].addressMap)}
         </div>
       </section>
 

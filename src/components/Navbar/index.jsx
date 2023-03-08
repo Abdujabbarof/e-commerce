@@ -14,7 +14,7 @@ const Navbar = () => {
 
             <nav>
                 <ul className={css.links}>
-                    <li><Link to='/products'>Mahsulotlarimiz</Link></li>
+                    <li><Link to=''>Mahsulotlarimiz</Link></li>
                     <li><Link to=''>Biz haqimizda</Link></li>
                     <li><Link to=''>Kontakt</Link></li>
                 </ul>

@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Button'
 import css from './card.module.scss'
 
-const Card = ({img, name, price, discount}) => {
+const Card = ({img, name, price, discount, id}) => {
   return (
     <div className={`${css.card}`}>
         <div className={css.img}>
@@ -16,8 +16,7 @@ const Card = ({img, name, price, discount}) => {
                 <p>{discount == 0 ? "" : `${price} so'm`}</p>
             </div>
             <div className={css.btns}>
-                <Button text='Batafsil' broder type='secondary'  />
-                <Button text='Sotib olish' broder  />
+                <Button text="Batafsil" href={`/${id}`} broder type=''  />
             </div>
         </div>
     </div>
