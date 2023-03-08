@@ -1,0 +1,30 @@
+.footer{
+      background-color: #ccc;
+
+      li{
+            margin-bottom: 20px;
+
+            &:first-child{
+                  font-size: 18px;
+
+            }
+
+            a{
+                  color:#6c6464;
+                  transition: 0.4s;
+
+                  &:hover{
+                        color:rgb(64, 137, 220);
+                  }
+            }
+      }
+
+      .medias{
+            display: flex;
+            gap: 30px;
+
+            a{
+                  font-size: 23px;
+            }
+      }
+}
