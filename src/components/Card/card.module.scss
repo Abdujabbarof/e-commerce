@@ -4,6 +4,8 @@
     background-color: var(--white);
     cursor: pointer;
     border: 1px solid var(--silver);
+    transition: .3s;
+    border-radius: 5px;
 
     .img{
         width: 100%;
@@ -13,10 +15,6 @@
             width: 100%;
             height: 100%;
             transition: .4s;
-            
-            &:hover{
-                transform: scale(1.03);
-            }
         }
     }
 

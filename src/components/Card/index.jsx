@@ -16,7 +16,7 @@ const Card = ({img, name, price, discount, id}) => {
                 <p>{discount == 0 ? "" : `${price} so'm`}</p>
             </div>
             <div className={css.btns}>
-                <Button text="Batafsil" href={`/${id}`} broder type=''  />
+                <Button text="Batafsil ko'rish" href={`/${id}`} broder type='secondary'  />
             </div>
         </div>
     </div>

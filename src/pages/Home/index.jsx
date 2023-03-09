@@ -17,13 +17,12 @@ const {TextArea} = Input
 const Home = () => {
   const [searchParams, setSearchParam] = useSearchParams({})
   const query1 = useGetData(['lists'], 'category')?.data?.data?.data
-  const query2 = useGetData(['infos'], 'information')?.data?.data?.data
+  const query2 = useGetData(['infos'], 'information')
   const params = searchParams.get("category")
+
   const [data, setData] = useState([])
   const [isloading, setIsloading] = useState(true)
-  const [messageApi, contextHolder] = message.useMessage();
-  const [ form ] = Form.useForm()
-
+  const [messageApi, contextHolder] = message.useMessage();  const [ form ] = Form.useForm()
   const [search, setSearch] = useState('')
   const [filtered, setFiltered] = useState([])
 
@@ -60,25 +59,13 @@ const Home = () => {
     })
   }
 
-  if(isloading ) {
+  if(isloading || !query2.isFetched) {
     return <Loading />
   }
 
   return (
     <>
       {contextHolder}
-      {/* <section className={styles.categories} id='mahsulotlarimiz'>
-        <div className={`container ${styles.container}`}>
-          <Input placeholder='Qidiruv...' size='large' className={styles.search} allowClear prefix={<SearchOutlined />} />
-          <div className={styles.cards}>
-            {
-              query2.data?.data?.data.map(data => (
-                <Card key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={data.photoId} />
-              ))
-            }
-          </div>
-        </div>
-      </section> */}
 
       <section className={styles.categories} id='mahsulotlarimiz'>
         <div className={`container ${styles.container}`}>
@@ -114,9 +101,9 @@ const Home = () => {
             </div>
 
             <div className={styles.info}>
-              <Link><i class="fa-solid fa-location-dot"></i> {query2[0]?.address}</Link>
-              <Link to={`tel:${query2[0]?.phone[0]}`}><i class="fa-solid fa-phone"></i> {query2[0]?.phone[0]}</Link>
-              <Link to={`mailto:${query2[0]?.email}`}><i class="fa-solid fa-envelope"></i>{query2[0]?.email}</Link>
+              <Link><i class="fa-solid fa-location-dot"></i> {query2.isFetched && query2?.data?.data?.data[0].address}</Link>
+              <Link to={`tel:${query2.isFetched && query2?.data?.data?.data[0].phone[0]}`}><i class="fa-solid fa-phone"></i> {query2.isFetched && query2?.data?.data?.data[0].phone[0]}</Link>
+              <Link to={`mailto:${query2.isFetched && query2?.data?.data?.data[0].email}`}><i class="fa-solid fa-envelope"></i>{query2.isFetched && query2?.data?.data?.data[0].email}</Link>
             </div>
 
           </div>
@@ -136,7 +123,7 @@ const Home = () => {
               <Input className={styles.input} placeholder='Raqamingiz...' />
             </Form.Item>
 
-            <Form.Item label='Mavzu:' name='subject' labelCol={{span: 24}} wrapperCol={{span: 24}} 
+            <Form.Item label='MAVZU:' name='subject' labelCol={{span: 24}} wrapperCol={{span: 24}} 
             rules={[
               {
                 required: true,
@@ -151,7 +138,7 @@ const Home = () => {
               <Input className={styles.input} placeholder='Mavzu...' />
             </Form.Item>
 
-            <Form.Item label='Xabar:' name='message' labelCol={{span: 24}} wrapperCol={{span: 24}} 
+            <Form.Item label='XABAR:' name='message' labelCol={{span: 24}} wrapperCol={{span: 24}} 
             rules={[
               {
                 required: true,
@@ -169,16 +156,16 @@ const Home = () => {
             <Button text="Jo'natish" type='secondary' radius event='submit' />
           </Form>
 
-          {parse(query2[0].addressMap)}
+          {parse(query2.isFetched && query2?.data?.data?.data[0].addressMap)}
         </div>
       </section>
 
       <section className={styles.about}>
         <div className={`container ${styles.container}`}>
           <h1>Biz haqimizda</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel! Distinctio vero debitis earum et!</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel! Distinctio vero debitis earum et!</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel! Distinctio vero debitis earum et!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor!</p>
         </div>
       </section>
     </>
