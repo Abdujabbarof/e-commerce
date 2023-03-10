@@ -3,8 +3,7 @@ import { useModal } from '../../utils/useModal'
 import Button from '../Button'
 import css from './card.module.scss'
 
-const Card = ({img, name, price, discount, id}) => {
-    const {setVisible} = useModal()
+const Card = ({img, name, price, discount, children}) => {
   return (
     <div className={`${css.card}`}>
         <div className={css.img}>
@@ -18,7 +17,7 @@ const Card = ({img, name, price, discount, id}) => {
                 <p>{discount == 0 ? "" : `${price} so'm`}</p>
             </div>
             <div className={css.btns}>
-                <Button text="Batafsil ko'rish" onClick={() => setVisible(true)} broder type='secondary'  />
+                {children}
             </div>
         </div>
     </div>
