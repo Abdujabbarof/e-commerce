@@ -54,3 +54,7 @@ img {
     max-width: 65rem;
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

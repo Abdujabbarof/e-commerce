@@ -4,7 +4,7 @@ import Button from '../../components/Button'
 import styles from './home.module.scss'
 import Card from '../../components/Card'
 import { useGetData } from '../../utils/getDatas'
-import { Form, Input, message, Modal, Spin } from 'antd'
+import { Form, Input, message, Modal } from 'antd'
 import { Link } from 'react-router-dom'
 import { SearchOutlined } from '@ant-design/icons'
 import { useSearchParams } from 'react-router-dom'
@@ -23,7 +23,7 @@ const Home = () => {
   const [search, setSearch] = useState('')
   const [filtered, setFiltered] = useState([])
   const [showAll, setShowAll] = useState(false)
-  const {visible, setVisible} = useModal()
+  const {visible, setVisible, darkMode} = useModal()
   const [single, setSingle] = useState({})
 
   const query1 = useGetData(['lists'], 'category')?.data?.data?.data
@@ -103,8 +103,8 @@ const Home = () => {
           <div className={styles.cards}>
             {
                showAll ? filtered?.slice(0, 8).map((data) => (
-                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={params ? 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg' : `http://3.19.30.204/upload/${data?.photo?.path}`}><Button text="Batafsil ko'rish" onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'  /></Card>)) : filtered?.map((data) => (
-                  <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={params ? 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg' : `http://3.19.30.204/upload/${data?.photo?.path}`}><Button text="Batafsil ko'rish" onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'/></Card>
+                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text="Batafsil ko'rish" onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'  /></Card>)) : filtered?.map((data) => (
+                  <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text="Batafsil ko'rish" onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'/></Card>
                 ))
             }
           </div>
@@ -115,7 +115,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className={styles.contact} id='kontakt' >
+      {/* <section className={styles.contact} id='kontakt' >
         <div className={`container ${styles.container}`}>
 
           <div className={styles.left}>
@@ -181,7 +181,7 @@ const Home = () => {
 
           {parse(query2.isFetched && query2?.data?.data?.data[0].addressMap)}
         </div>
-      </section>
+      </section> */}
 
       <section className={styles.about} id='biz' >
         <div className={`container ${styles.container}`}>
@@ -193,23 +193,25 @@ const Home = () => {
       </section>
 
       <Modal open={visible} width={1024} onCancel={() => setVisible(false)} centered style={{marginTop: '-6%'}} className={styles.modal} footer={false}>
-        <div className={styles.modal}>
-          <div className={styles.left}>
-            <img src="https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg" alt="photo" />
-          </div>
+        <div className={styles.wrapper}>
+          <div className={styles.modal}>
+            <div className={styles.left}>
+              <img src={`http://3.19.30.204/upload/${single?.photo?.path}`}/>
+            </div>
 
-          <div className={styles.right}>
-            <h1>{single.name_Uz}</h1>
-            <ul>
-              <li>{single.gender}</li>
-              <li>Rangi: <span>{single.color}</span></li>
-              <li>Sotuvda: <span>{single.active ? "Bor" : "Yo'q"}</span></li>
-              <li>Narxi: <span><h5>{single.discount == 0 ? `${single.price} so'm` : `${Math.floor(single.price - (single.price * single.discount / 100))} so'm`}</h5>
-                <p>{single.discount == 0 ? "" : `${single.price} so'm`}</p></span></li>
-              <li>O'lchami: <span>{single.size}</span></li>
-              <li>Mahsulot turi: <span>{single.type}</span></li>
-              <li>{single.description_Uz}</li>
-            </ul>
+            <div className={styles.right}>
+              <h1>{single.name_Uz}</h1>
+              <ul>
+                <li>{single.gender}</li>
+                <li>Rangi: <span>{single.color}</span></li>
+                <li>Sotuvda: <span>{single.active ? "Bor" : "Yo'q"}</span></li>
+                <li>Narxi: <span><h5>{single.discount == 0 ? `${single.price} so'm` : `${Math.floor(single.price - (single.price * single.discount / 100))} so'm`}</h5>
+                  <p>{single.discount == 0 ? "" : `${single.price} so'm`}</p></span></li>
+                <li>O'lchami: <span>{single.size}</span></li>
+                <li>Mahsulot turi: <span>{single.type}</span></li>
+                <li>{single.description_Uz}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </Modal>

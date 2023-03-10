@@ -1,3 +1,4 @@
+import useModal from 'antd/es/modal/useModal'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import css from './navbar.module.scss'
@@ -23,6 +24,8 @@ const Navbar = ({tg, ig}) => {
                     <li><Link to={tg}><i class="fa-brands fa-telegram"></i></Link></li>
                     <li><Link to={ig}><i class="fa-brands fa-instagram"></i></Link></li>
                 </ul>
+
+                
             </nav>
 
             <label htmlFor="checkbox" className={css.open}>

@@ -1,0 +1,73 @@
+input[type='checkbox'] {
+    display: none;
+}
+
+input[id='settings']{
+    &:checked ~ .settings {
+        right: 1rem;
+    }
+
+    &:checked ~ .settings {
+        gap: 1rem;
+
+        .label {
+            border-radius: 50%;
+        }
+    }
+}
+
+.settings {
+    position: fixed;
+    right: -10rem;
+    top: 10rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transition: .4s;
+    z-index: 110;
+    
+    .label {
+        width: 5rem;
+        height: 5rem;
+        background-color: orange;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
+        border-radius: 50% 0 0 50%;
+        color: var(--black);
+        cursor: pointer;
+        left: -100%;
+        transition: .4s;
+
+        i {
+            animation: rotation 2s infinite linear;
+        }
+
+        @keyframes rotation {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+    }
+
+    .main {
+        width: 10rem;
+        background-color: var(--white);
+        border-radius: 1rem;
+        border: 1px solid #e3e3e3;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem;
+        gap: .5rem;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+}
