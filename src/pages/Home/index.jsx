@@ -83,8 +83,8 @@ const Home = () => {
 
           <div className={styles.cards}>
             {
-              filtered?.map(data => (
-                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={data.photoId} />
+              filtered?.map((data) => (
+                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={params ? 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg' : `http://3.19.30.204/upload/${data.photo.path}`} />
               ))
             }
           </div>

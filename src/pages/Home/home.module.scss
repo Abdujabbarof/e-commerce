@@ -1,6 +1,6 @@
 .categories {
     width: 100%;
-    min-height: 100vh;
+    min-height: 30vh;
     padding: 6rem 3rem;
     background-color: var(--bg);
 
@@ -80,7 +80,7 @@
 
 .contact{
     width: 100%;
-    padding: 15rem 3.3%;
+    padding: 9rem 3.3% 15rem;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -224,7 +224,7 @@
 
     .contact {
         .container{
-            padding: 0;
+            padding: 2rem 3.3%;
             grid-template-columns: 1fr;
             gap: 5rem;
             border: none;
