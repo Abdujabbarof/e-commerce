@@ -3,7 +3,7 @@ import css from './loading.module.scss'
 
 const Loading = () => {
   return (
-    <div className={css.loading}>Loading...</div>
+    <div className={css.loading}>Yuklanmoqda...</div>
   )
 }
 

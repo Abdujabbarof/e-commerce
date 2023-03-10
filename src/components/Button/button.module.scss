@@ -1,5 +1,6 @@
 .btn{
-    display: inline-block;
+    display: grid;
+    grid-template-columns: 1fr;
     padding: .9rem 2.7rem;
     font-weight: 500;
     font-size: 15px;
@@ -31,6 +32,10 @@
 
 .silver {
     border: 1px solid #e3e3e3;
+
+    &:hover{
+        border-color: var(--gray);
+    }
 }
 
 .regular {

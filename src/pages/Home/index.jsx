@@ -1,9 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react'
+import Navbar from '../../components/Navbar'
 import Button from '../../components/Button'
 import styles from './home.module.scss'
 import Card from '../../components/Card'
 import { useGetData } from '../../utils/getDatas'
-import { Form, Input, message } from 'antd'
+import { Form, Input, message, Modal } from 'antd'
 import { Link } from 'react-router-dom'
 import { SearchOutlined } from '@ant-design/icons'
 import { useSearchParams } from 'react-router-dom'
@@ -11,23 +12,26 @@ import { instance } from '../../utils/AxiosInstance'
 import Loading from '../Loading'
 import { useMutation } from 'react-query'
 import parse from 'html-react-parser';
-
+import { useModal } from '../../utils/useModal'
 const {TextArea} = Input
 
 const Home = () => {
-  const [searchParams, setSearchParam] = useSearchParams({})
-  const query1 = useGetData(['lists'], 'category')?.data?.data?.data
-  const query2 = useGetData(['infos'], 'information')
-  const params = searchParams.get("category")
-
+  const [searchParams, setSearchParam] = useSearchParams()
   const [data, setData] = useState([])
   const [isloading, setIsloading] = useState(true)
   const [messageApi, contextHolder] = message.useMessage();  const [ form ] = Form.useForm()
   const [search, setSearch] = useState('')
   const [filtered, setFiltered] = useState([])
+  const [showAll, setShowAll] = useState(false)
+
+  const query1 = useGetData(['lists'], 'category')?.data?.data?.data
+  const query2 = useGetData(['infos'], 'information')
+  const params = searchParams.get("category")
+
+  const {visible, setVisible} = useModal()
 
   const setParam = (e) => {
-    setSearchParam({category: e.target.getAttribute('value').toLowerCase()});
+    setSearchParam({ ...searchParams, category: e.target.getAttribute('value').toLowerCase() });
   }
 
   useEffect(() => {
@@ -63,8 +67,13 @@ const Home = () => {
     return <Loading />
   }
 
+  const showAllProduct = () => {
+    setShowAll(!showAll)
+  }
+
   return (
     <>
+      <Navbar tg={query2?.data?.data?.data?.telegram} ig={query2?.data?.data?.data?.instagram} />
       {contextHolder}
 
       <section className={styles.categories} id='mahsulotlarimiz'>
@@ -83,15 +92,20 @@ const Home = () => {
 
           <div className={styles.cards}>
             {
-              filtered?.map((data) => (
-                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={params ? 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg' : `http://3.19.30.204/upload/${data.photo.path}`} />
-              ))
+               showAll ? filtered?.slice(0, 8).map((data) => (
+                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={params ? 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg' : `http://3.19.30.204/upload/${data?.photo?.path}`} />)) : filtered?.map((data) => (
+                  <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={params ? 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg' : `http://3.19.30.204/upload/${data?.photo?.path}`} />
+                ))
             }
+          </div>
+
+          <div className={styles.btns}>
+            {filtered.length !== 0 ? <Button onClick={showAllProduct} text={`${showAll ? 'Qisqartirish' : 'Barchasi'}`} border='silver' /> : <h1>{`Mahsulotlar mavjud emas :(`}</h1>}
           </div>
         </div>
       </section>
 
-      <section className={styles.contact}>
+      {/* <section className={styles.contact} id='kontakt' >
         <div className={`container ${styles.container}`}>
 
           <div className={styles.left}>
@@ -101,8 +115,8 @@ const Home = () => {
             </div>
 
             <div className={styles.info}>
-              <Link><i class="fa-solid fa-location-dot"></i> {query2.isFetched && query2?.data?.data?.data[0].address}</Link>
-              <Link to={`tel:${query2.isFetched && query2?.data?.data?.data[0].phone[0]}`}><i class="fa-solid fa-phone"></i> {query2.isFetched && query2?.data?.data?.data[0].phone[0]}</Link>
+              <Link><i class="fa-solid fa-location-dot"></i> {query2.isFetched && query2?.data?.data?.data[0]?.address}</Link>
+              <Link to={`tel:${query2.isFetched && query2?.data?.data?.data[0]?.phone[0]}`}><i class="fa-solid fa-phone"></i> {query2.isFetched && query2?.data?.data?.data[0].phone[0]}</Link>
               <Link to={`mailto:${query2.isFetched && query2?.data?.data?.data[0].email}`}><i class="fa-solid fa-envelope"></i>{query2.isFetched && query2?.data?.data?.data[0].email}</Link>
             </div>
 
@@ -158,9 +172,9 @@ const Home = () => {
 
           {parse(query2.isFetched && query2?.data?.data?.data[0].addressMap)}
         </div>
-      </section>
+      </section> */}
 
-      <section className={styles.about}>
+      <section className={styles.about} id='biz' >
         <div className={`container ${styles.container}`}>
           <h1>Biz haqimizda</h1>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!</p>
@@ -168,6 +182,28 @@ const Home = () => {
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor!</p>
         </div>
       </section>
+
+      <Modal open={visible} width={1024} onCancel={() => setVisible(false)} centered style={{marginTop: '-6%'}} className={styles.modal} footer={false}>
+        <div className={styles.modal}>
+          <div className={styles.left}>
+            <img src="https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg" alt="photo" />
+          </div>
+
+          <div className={styles.right}>
+            <h1>Nissan GTR</h1>
+            <ul>
+              <li>Ayollar uchun</li>
+              <li>Rangi: <span>Qizil</span></li>
+              <li>Sotuvda: <span>Bor</span></li>
+              <li>Narxi: <span><p>-100000 so'm</p><h5>2103213 so'm</h5></span></li>
+              <li>O'lchami: <span>XXL</span></li>
+              <li>Mahsulot turi: <span>Nimadir</span></li>
+              <li>Mahsulot nomi: <span>Nimadir</span></li>
+              <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, aut!</li>
+            </ul>
+          </div>
+        </div>
+      </Modal>
     </>
   )
 }

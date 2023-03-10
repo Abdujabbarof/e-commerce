@@ -1,6 +1,6 @@
 .card{
     width: 100%;
-    padding: 3rem 2.5rem;
+    padding: 1rem 1rem;
     background-color: var(--white);
     cursor: pointer;
     border: 1px solid var(--silver);
@@ -13,7 +13,7 @@
 
     .img{
         width: 100%;
-        min-height: 30rem;
+        height: 24rem;
         overflow: hidden;
 
         img{
@@ -21,17 +21,19 @@
             height: 100%;
             transition: .4s;
             object-fit: cover;
+            border-radius: 5px;
         }
     }
 
     .text {
+        width: 100%;
         text-align: center;
-        margin-top: 2rem;
+        margin-top: 1rem;
 
         h2 {
             font-size: 2rem;
             font-weight: 700;
-            line-height: 2.7rem;
+            line-height: 120%;
             color: var(--black);
         }
 
@@ -55,31 +57,31 @@
                 text-decoration: line-through;
             }
         }
-    }
 
-    .btns {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        margin-top: 1.5rem;
-    }
-}
-
-@media (max-width: 678px) {
-    .card{
         .btns {
-            flex-direction: column;
-
-            button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+    
+            a {
                 width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
     }
+
 }
 
 @media (max-width: 480px) {
     .card{
-        padding: 3rem;
+        padding: 1.5rem;
+
+        .img{
+            height: 30rem;
+        }
     }
 }
