@@ -51,7 +51,7 @@ input[id='settings']{
             to {
               transform: rotate(360deg);
             }
-          }
+        }
     }
 
     .main {
@@ -71,3 +71,12 @@ input[id='settings']{
         }
     }
 }
+
+.darkMode {
+    background-color: var(--darkMode) !important;
+}
+
+.white {
+    color: var(--white) !important;
+}
+

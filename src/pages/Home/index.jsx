@@ -16,6 +16,7 @@ import { useModal } from '../../utils/useModal'
 const {TextArea} = Input
 
 const Home = () => {
+  const {visible, setVisible, darkMode} = useModal()
   const [searchParams, setSearchParam] = useSearchParams()
   const [data, setData] = useState([])
   const [isloading, setIsloading] = useState(true)
@@ -23,7 +24,6 @@ const Home = () => {
   const [search, setSearch] = useState('')
   const [filtered, setFiltered] = useState([])
   const [showAll, setShowAll] = useState(false)
-  const {visible, setVisible, darkMode} = useModal()
   const [single, setSingle] = useState({})
 
   const query1 = useGetData(['lists'], 'category')?.data?.data?.data
@@ -86,9 +86,23 @@ const Home = () => {
 
       {contextHolder}
 
-      <section className={styles.categories} id='mahsulotlarimiz'>
+      <section className={`${styles.showcase} ${darkMode && styles.darkMode2}`}>
+        <div className={styles.text}>
+          <h1 className={`${styles.heroTitle} ${darkMode && styles.white}`}>Xush kelibsiz!</h1>
+          <h1 className={`${styles.heroTitle} ${darkMode && styles.white}`}>#FOYDALI va #SAVOBLI</h1>
+          <a className={`${darkMode && styles.button}`} href="#mahsulotlarimiz">Bu yerga bosing!</a>
+        </div>
+
+        <div className={`${styles.animate}`}>
+          <a className={`${darkMode && styles.white}`} href="#mahsulotlarimiz">
+            <i class="fa-solid fa-chevron-down"></i>
+          </a>
+        </div>
+      </section>
+
+      <section className={`${styles.categories} ${darkMode && styles.darkMode}`} id='mahsulotlarimiz'>
         <div className={`container ${styles.container}`}>
-          <Input placeholder='Qidiruv...' value={search} onChange={(e) => setSearch(e.target.value)} size='large' className={styles.search} allowClear prefix={<SearchOutlined />} />
+          <Input placeholder='Qidiruv...' value={search} onChange={(e) => setSearch(e.target.value)} size='large' className={`${styles.search} ${darkMode && styles.darkMode2}`} allowClear prefix={<SearchOutlined className={darkMode && styles.gray} />} />
           
           <h1 className={styles.title}>Kategoriyalar</h1>
           <div className={styles.wrap}>
@@ -115,7 +129,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* <section className={styles.contact} id='kontakt' >
+      {/* <section className={`${styles.contact} ${darkMode && styles.darkMode}`} id='kontakt' >
         <div className={`container ${styles.container}`}>
 
           <div className={styles.left}>
@@ -183,17 +197,17 @@ const Home = () => {
         </div>
       </section> */}
 
-      <section className={styles.about} id='biz' >
+      <section className={`${styles.about} ${darkMode && styles.darkMode2}`} id='biz' >
         <div className={`container ${styles.container}`}>
-          <h1>Biz haqimizda</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique!</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor!</p>
+          <h1 className={darkMode && styles.white}>Biz haqimizda</h1>
+          <p className={darkMode && styles.silver}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!</p>
+          <p className={darkMode && styles.silver}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique!</p>
+          <p className={darkMode && styles.silver}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor!</p>
         </div>
       </section>
 
       <Modal open={visible} width={1024} onCancel={() => setVisible(false)} centered style={{marginTop: '-6%'}} className={styles.modal} footer={false}>
-        <div className={styles.wrapper}>
+        <div className={`${styles.wrapper}`}>
           <div className={styles.modal}>
             <div className={styles.left}>
               <img src={`http://3.19.30.204/upload/${single?.photo?.path}`}/>

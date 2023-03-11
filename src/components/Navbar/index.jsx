@@ -1,23 +1,27 @@
-import useModal from 'antd/es/modal/useModal'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import css from './navbar.module.scss'
+import { useModal } from '../../utils/useModal'
+import { useTranslation } from 'react-i18next'
 
 const Navbar = ({tg, ig}) => {
+    const {darkMode} = useModal()
+    const {t} = useTranslation()
+
   return (
-    <header>
+    <header className={`${darkMode && css.darkMode}`}>
         <div className={`container ${css.container}`}>
             <Link to='/'>
-                <p>LOGO</p>
+                <p className={`${darkMode && css.color}`}>LOGO</p>
             </Link>
 
             <input type="checkbox" id='checkbox' />
 
             <nav>
                 <ul className={css.links}>
-                    <li><a href='#mahsulotlarimiz'>Mahsulotlarimiz</a></li>
-                    <li><a href='#biz'>Biz haqimizda</a></li>
-                    <li><a href='#kontakt'>Kontakt</a></li>
+                    <li><a href='#mahsulotlarimiz' className={`${darkMode && css.color} ${darkMode && css.hover}`}>Mahsulotlarimiz</a></li>
+                    <li><a href='#biz' className={`${darkMode && css.color} ${darkMode && css.hover}`}>Biz haqimizda</a></li>
+                    <li><a href='#kontakt' className={`${darkMode && css.color} ${darkMode && css.hover}`}>Kontakt</a></li>
                 </ul>
 
                 <ul className={css.socials}>
@@ -28,7 +32,7 @@ const Navbar = ({tg, ig}) => {
                 
             </nav>
 
-            <label htmlFor="checkbox" className={css.open}>
+            <label htmlFor="checkbox" className={`${css.open} ${darkMode && css.color}`}>
                 <i class="fa-solid fa-bars"></i>
             </label>
             <label htmlFor="checkbox" className={css.wrap}>

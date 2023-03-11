@@ -10,4 +10,10 @@
     justify-content: center;
     align-items: center;
     font-size: 3rem;
+    transition: .3s ease-in-out;
+}
+
+.darkMode {
+    background-color: var(--black) !important;
+    color: var(--white) !important;
 }

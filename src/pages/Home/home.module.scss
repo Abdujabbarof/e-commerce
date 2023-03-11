@@ -1,3 +1,53 @@
+.showcase {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .text {
+        transform: translateY(-40%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+
+        h1 {
+            font-size: 5rem;
+        }
+
+        a {
+            padding: 1.1rem 3.3rem;
+            font-size: 2rem;
+            border: 1px solid var(--black);
+            border-radius: 50px;
+            color: var(--black);
+        }
+    }
+
+    .animate {
+        position: absolute;
+        bottom: 4rem;
+        font-size: 3rem;
+        animation: down 2s infinite linear;
+        transition: .4s ease-in;
+
+        a {
+            color: var(--black);
+        }
+    }
+
+    @keyframes down {
+        50% {
+            transform: translateY(1rem);
+        }100% {
+            transform: translateY(0);
+        }
+    }
+}
+
 .categories {
     width: 100%;
     min-height: 30vh;
@@ -14,6 +64,14 @@
             padding: 1rem;
             font-size: 1.5rem;
             border: 1px solid var(--silver);
+
+            input[type='text'] {
+                background-color: transparent;
+                
+                &::placeholder {
+                    color: rgb(153, 150, 150);
+                }
+            }
 
             &:hover {
                 border-color: var(--black);
@@ -230,6 +288,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: .7rem;
 
     .modal {
         width: 100%;
@@ -425,3 +484,34 @@
         }
     }
 }
+
+.darkMode {
+    background-color: var(--black) !important;
+}
+
+.darkMode2 {
+    background-color: var(--darkMode) !important;
+
+    &:hover {
+        border-color: var(--white) !important;
+    }
+}
+
+.white {
+    color: var(--white) !important;
+}
+
+.gray {
+    color: rgb(153, 150, 150) !important;
+}
+
+.silver {
+    color: var(--silver) !important;
+}
+
+.button {
+    background-color: var(--white) !important;
+    color: var(--black) !important;
+}
+
+
