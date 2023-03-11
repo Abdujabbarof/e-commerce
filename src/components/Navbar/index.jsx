@@ -17,11 +17,11 @@ const Navbar = ({tg, ig}) => {
 
             <input type="checkbox" id='checkbox' />
 
-            <nav>
+            <nav className={`${darkMode && css.dark}`}>
                 <ul className={css.links}>
-                    <li><a href='#mahsulotlarimiz' className={`${darkMode && css.color} ${darkMode && css.hover}`}>Mahsulotlarimiz</a></li>
-                    <li><a href='#biz' className={`${darkMode && css.color} ${darkMode && css.hover}`}>Biz haqimizda</a></li>
-                    <li><a href='#kontakt' className={`${darkMode && css.color} ${darkMode && css.hover}`}>Kontakt</a></li>
+                    <li><a href='#mahsulotlarimiz' className={`${darkMode && css.color} ${darkMode && css.hover}`}>{t('link1')}</a></li>
+                    <li><a href='#biz' className={`${darkMode && css.color} ${darkMode && css.hover}`}>{t('link2')}</a></li>
+                    <li><a href='#kontakt' className={`${darkMode && css.color} ${darkMode && css.hover}`}>{t('link3')}</a></li>
                 </ul>
 
                 <ul className={css.socials}>

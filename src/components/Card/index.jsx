@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useModal } from '../../utils/useModal'
-import Button from '../Button'
 import css from './card.module.scss'
 
 const Card = ({img, name, price, discount, children}) => {

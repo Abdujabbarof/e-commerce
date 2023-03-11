@@ -1,3 +1,21 @@
 {
-    "link": "Uzb"
+    "link1": "Mahsulotlarimiz",
+    "link2": "Biz haqimizda",
+    "link3": "Kontakt",
+    "hero1": "Xush kelibsiz!",
+    "hero2": "#FOYDALI va #SAVOBLI",
+    "heroBtn": "Bu yerga bosing!",
+    "search": "Qidiruv...",
+    "categories": "Kategoriyalar",
+    "categBtn": "Barchasi",
+    "categBt1": "Barchasi",
+    "categBtn2": "Qisqartirish",
+    "contactUs": "Biz bilan bog'lanish",
+    "info": "Bizga so'rovingizni yuboring va biz imkon qadar tezroq siz bilan bog'lanamiz",
+    "number": "RAQAMINGIZ",
+    "theme": "MAVZU",
+    "message": "XABAR",
+    "sent": "Jo'natish",
+    "aboutUs": "Biz haqimizda",
+    "cardBtn": "Batafsil ko'rish"
 }

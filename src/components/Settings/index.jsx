@@ -5,7 +5,7 @@ import { useModal } from '../../utils/useModal'
 import css from './settings.module.scss'
 
 const Settings = () => {
-    const { setDarkMode, darkMode} = useModal()
+    const { setDarkMode, darkMode, setLangRu, langRu } = useModal()
     const {i18n} = useTranslation()
     
     const handleCheck = (checked) => {
@@ -14,7 +14,10 @@ const Settings = () => {
 
     const handeLang = (value) => {
         i18n.changeLanguage(value)
+        setLangRu(value)
     }
+
+    console.log(langRu);
 
   return (
     <>

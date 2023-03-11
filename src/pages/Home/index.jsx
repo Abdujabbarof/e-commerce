@@ -13,6 +13,8 @@ import Loading from '../Loading'
 import { useMutation } from 'react-query'
 import parse from 'html-react-parser';
 import { useModal } from '../../utils/useModal'
+import Footer from '../../components/Footer'
+import { useTranslation } from 'react-i18next'
 const {TextArea} = Input
 
 const Home = () => {
@@ -30,6 +32,7 @@ const Home = () => {
   const query2 = useGetData(['infos'], 'information')
   const params = searchParams.get("category")
 
+  const {t} = useTranslation()
 
   const setParam = (e) => {
     setSearchParam({ ...searchParams, category: e.target.getAttribute('value').toLowerCase() });
@@ -88,13 +91,13 @@ const Home = () => {
 
       <section className={`${styles.showcase} ${darkMode && styles.darkMode2}`}>
         <div className={styles.text}>
-          <h1 className={`${styles.heroTitle} ${darkMode && styles.white}`}>Xush kelibsiz!</h1>
-          <h1 className={`${styles.heroTitle} ${darkMode && styles.white}`}>#FOYDALI va #SAVOBLI</h1>
-          <a className={`${darkMode && styles.button}`} href="#mahsulotlarimiz">Bu yerga bosing!</a>
+          <h1 className={`${styles.heroTitle} ${darkMode && styles.white}`}>{t('hero1')}</h1>
+          <h1 className={`${styles.heroTitle} ${darkMode && styles.white}`}>{t('hero2')}</h1>
+          <a className={`${darkMode && styles.button}`} href="#mahsulotlarimiz">{t('heroBtn')}</a>
         </div>
 
         <div className={`${styles.animate}`}>
-          <a className={`${darkMode && styles.white}`} href="#mahsulotlarimiz">
+          <a className={`${darkMode && styles.silver}`} href="#mahsulotlarimiz">
             <i class="fa-solid fa-chevron-down"></i>
           </a>
         </div>
@@ -102,12 +105,12 @@ const Home = () => {
 
       <section className={`${styles.categories} ${darkMode && styles.darkMode}`} id='mahsulotlarimiz'>
         <div className={`container ${styles.container}`}>
-          <Input placeholder='Qidiruv...' value={search} onChange={(e) => setSearch(e.target.value)} size='large' className={`${styles.search} ${darkMode && styles.darkMode2}`} allowClear prefix={<SearchOutlined className={darkMode && styles.gray} />} />
+          <Input placeholder={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} size='large' className={`${styles.search} ${darkMode && styles.darkMode2}`} allowClear prefix={<SearchOutlined className={darkMode && styles.gray} />} />
           
-          <h1 className={styles.title}>Kategoriyalar</h1>
+          <h1 className={styles.title}>{t('categories')}</h1>
           <div className={styles.wrap}>
             <div className={styles.link}>
-              <Button border='silver' text='Barchasi' onClick={() => setSearchParam({})} className={`${styles.btn}`}>Barchasi</Button>
+              <Button border='silver' text='Barchasi' onClick={() => setSearchParam({})} className={`${styles.btn}`}>{t('categBtn1')}</Button>
               {
                 query1?.map(item => <Button text={item.name_Uz} value={item.id} key={item.id} onClick={setParam} className={styles.links} border='silver' />)
               }
@@ -117,36 +120,36 @@ const Home = () => {
           <div className={styles.cards}>
             {
                showAll ? filtered?.slice(0, 8).map((data) => (
-                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text="Batafsil ko'rish" onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'  /></Card>)) : filtered?.map((data) => (
-                  <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text="Batafsil ko'rish" onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'/></Card>
+                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'  /></Card>)) : filtered?.map((data) => (
+                  <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'/></Card>
                 ))
             }
           </div>
 
           <div className={styles.btns}>
-            {filtered.length !== 0 ? <Button onClick={showAllProduct} text={`${showAll ? 'Qisqartirish' : 'Barchasi'}`} border='silver' /> : <h1>{`Mahsulotlar mavjud emas :(`}</h1>}
+            {filtered.length !== 0 ? <Button onClick={showAllProduct} text={`${showAll ? `${t('categBtn2')}` : `${t('categBtn')}`}`} border='silver' /> : <h1>{`Mahsulotlar mavjud emas :(`}</h1>}
           </div>
         </div>
       </section>
 
-      {/* <section className={`${styles.contact} ${darkMode && styles.darkMode}`} id='kontakt' >
-        <div className={`container ${styles.container}`}>
+      <section className={`${styles.contact} ${darkMode && styles.darkMode}`} id='kontakt' >
+        <div className={`container ${styles.container} ${darkMode && styles.darkMode2}`}>
 
           <div className={styles.left}>
             <div>
-              <h1>Biz bilan bog'lanish</h1>
-              <p>Bizga so'rovingizni yuboring va biz imkon qadar tezroq siz bilan bog'lanamiz</p>
+              <h1 className={`${darkMode && styles.white}`}>{t('contactUs')}</h1>
+              <p className={`${darkMode && styles.silver}`}>{t('info')}</p>
             </div>
 
             <div className={styles.info}>
-              <Link><i class="fa-solid fa-location-dot"></i>{query2.isFetched && query2?.data?.data?.data[0]?.address}</Link>
-              <Link to={`tel:${query2.isFetched && query2?.data?.data?.data[0]?.phone[0]}`}><i class="fa-solid fa-phone"></i> {query2.isFetched && query2?.data?.data?.data[0].phone[0]}</Link>
-              <Link to={`mailto:${query2.isFetched && query2?.data?.data?.data[0].email}`}><i class="fa-solid fa-envelope"></i>{query2.isFetched && query2?.data?.data?.data[0].email}</Link>
+              <Link className={`${darkMode && styles.white}`}><i class="fa-solid fa-location-dot"></i>{query2.isFetched && query2?.data?.data?.data[0]?.address}</Link>
+              <Link className={`${darkMode && styles.white}`} to={`tel:${query2.isFetched && query2?.data?.data?.data[0]?.phone[0]}`}><i class="fa-solid fa-phone"></i> {query2.isFetched && query2?.data?.data?.data[0].phone[0]}</Link>
+              <Link className={`${darkMode && styles.white}`} to={`mailto:${query2.isFetched && query2?.data?.data?.data[0].email}`}><i class="fa-solid fa-envelope"></i>{query2.isFetched && query2?.data?.data?.data[0].email}</Link>
             </div>
           </div>
 
           <Form form={form} className={styles.form} onFinish={handleSubmit}>
-            <Form.Item label='RAQAMINGIZ' name='phone' labelCol={{span: 24}} wrapperCol={{span: 24}} 
+            <Form.Item className={styles.label} label={`${t('number')}`} name='phone' labelCol={{span: 24}} wrapperCol={{span: 24}} 
             rules={[
               {
                 required: true,
@@ -157,10 +160,10 @@ const Home = () => {
                 message: "Iltimos to'gri raqam kiriting!"
               }
             ]} hasFeedback>
-              <Input className={styles.input} placeholder='Raqamingiz...' />
+              <Input className={styles.input} placeholder={`${t('number')}...`} />
             </Form.Item>
 
-            <Form.Item label='MAVZU:' name='subject' labelCol={{span: 24}} wrapperCol={{span: 24}} 
+            <Form.Item label={`${t('theme')}`} name='subject' labelCol={{span: 24}} wrapperCol={{span: 24}} 
             rules={[
               {
                 required: true,
@@ -172,10 +175,10 @@ const Home = () => {
               }
             ]} 
             hasFeedback>
-              <Input className={styles.input} placeholder='Mavzu...' />
+              <Input className={styles.input} placeholder={`${t('theme')}...`} />
             </Form.Item>
 
-            <Form.Item label='XABAR:' name='message' labelCol={{span: 24}} wrapperCol={{span: 24}} 
+            <Form.Item label={`${t('message')}`} name='message' labelCol={{span: 24}} wrapperCol={{span: 24}} 
             rules={[
               {
                 required: true,
@@ -187,19 +190,19 @@ const Home = () => {
               }
             ]} 
             hasFeedback>
-              <TextArea className={styles.input} placeholder='Xabar...' />
+              <TextArea className={styles.input} placeholder={`${t('message')}...`} />
             </Form.Item>
  
-            <Button text="Jo'natish" type='secondary' radius event='submit' />
+            <Button text={`${t('sent')}`} type='secondary' radius event='submit' />
           </Form>
 
           {parse(query2.isFetched && query2?.data?.data?.data[0].addressMap)}
         </div>
-      </section> */}
+      </section>
 
       <section className={`${styles.about} ${darkMode && styles.darkMode2}`} id='biz' >
         <div className={`container ${styles.container}`}>
-          <h1 className={darkMode && styles.white}>Biz haqimizda</h1>
+          <h1 className={darkMode && styles.white}>{t('aboutUs')}</h1>
           <p className={darkMode && styles.silver}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!</p>
           <p className={darkMode && styles.silver}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique!</p>
           <p className={darkMode && styles.silver}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor!</p>
@@ -229,6 +232,8 @@ const Home = () => {
           </div>
         </div>
       </Modal>
+
+      <Footer />
     </>
   )
 }

@@ -166,7 +166,7 @@
         padding: 4rem 3rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         background-color: var(--white);
         row-gap: 3rem;
         
@@ -221,10 +221,11 @@
             }
         }
 
+        
         .form{
             width: 100%;
             margin: 0 auto;
-
+            
             .input { 
                 padding: 1rem;
                 font-size: 1.5rem;
@@ -412,6 +413,15 @@
 
 
 @media (max-width: 768px) {
+    .showcase{
+        .text {
+            gap: 1rem;
+            h1{
+                font-size: 3.5rem;
+            }
+        }
+    }
+
     .wrapper {
         width: 100%;
 
@@ -426,6 +436,20 @@
 
 
 @media (max-width: 480px) {
+    .showcase{
+        .text {
+            h1{
+                font-size: 2.6rem;
+                text-align: center;
+            }
+
+            a {
+                font-size: 1.4rem;
+                margin-top: 1rem;
+            }
+        }
+    }
+
     .categories {
         padding: 5rem 3.3%;
         
@@ -487,6 +511,10 @@
 
 .darkMode {
     background-color: var(--black) !important;
+    
+    label {
+        color: white !important;
+    }
 }
 
 .darkMode2 {
@@ -499,6 +527,11 @@
 
 .white {
     color: var(--white) !important;
+
+    i{
+        background-color: var(--white) !important;
+        color: var(--black) !important;
+    }
 }
 
 .gray {
