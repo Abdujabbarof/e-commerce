@@ -17,8 +17,6 @@ const Settings = () => {
         setLangRu(value)
     }
 
-    console.log(langRu);
-
   return (
     <>
         <input type="checkbox" id='settings' />

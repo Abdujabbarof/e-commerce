@@ -89,7 +89,7 @@ const Home = () => {
 
       {contextHolder}
 
-      <section className={`${styles.showcase} ${darkMode && styles.darkMode2}`}>
+      <section className={`${styles.showcase} ${darkMode && styles.darkMode2} ${darkMode && styles.darkBg}`}>
         <div className={styles.text}>
           <h1 className={`${styles.heroTitle} ${darkMode && styles.white}`}>{t('hero1')}</h1>
           <h1 className={`${styles.heroTitle} ${darkMode && styles.white}`}>{t('hero2')}</h1>
@@ -105,7 +105,7 @@ const Home = () => {
 
       <section className={`${styles.categories} ${darkMode && styles.darkMode}`} id='mahsulotlarimiz'>
         <div className={`container ${styles.container}`}>
-          <Input placeholder={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} size='large' className={`${styles.search} ${darkMode && styles.darkMode2}`} allowClear prefix={<SearchOutlined className={darkMode && styles.gray} />} />
+          <Input placeholder={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} size='large' className={`${styles.search} ${darkMode && styles.darkMode2}`} allowClear prefix={<SearchOutlined className={`${darkMode && styles.gray}`} />} />
           
           <h1 className={styles.title}>{t('categories')}</h1>
           <div className={styles.wrap}>
@@ -127,7 +127,7 @@ const Home = () => {
           </div>
 
           <div className={styles.btns}>
-            {filtered.length !== 0 ? <Button onClick={showAllProduct} text={`${showAll ? `${t('categBtn2')}` : `${t('categBtn')}`}`} border='silver' /> : <h1>{`Mahsulotlar mavjud emas :(`}</h1>}
+            {filtered.length !== 0 ? <Button onClick={showAllProduct} text={`${showAll ? `${t('categBtn2')}` : `${t('categBtn')}`}`} border='silver' /> : <h1 className={`${darkMode && styles.white}`}>{t('noItem')}</h1>}
           </div>
         </div>
       </section>
@@ -202,10 +202,10 @@ const Home = () => {
 
       <section className={`${styles.about} ${darkMode && styles.darkMode2}`} id='biz' >
         <div className={`container ${styles.container}`}>
-          <h1 className={darkMode && styles.white}>{t('aboutUs')}</h1>
-          <p className={darkMode && styles.silver}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!</p>
-          <p className={darkMode && styles.silver}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique!</p>
-          <p className={darkMode && styles.silver}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor!</p>
+          <h1 className={`${darkMode && styles.white}`}>{t('aboutUs')}</h1>
+          <p className={`${darkMode && styles.silver}`}>{t('info1')}</p>
+          <p className={`${darkMode && styles.silver}`}>{t('info2')}</p>
+          <p className={`${darkMode && styles.silver}`}>{t('info3')}</p>
         </div>
       </section>
 
@@ -220,12 +220,12 @@ const Home = () => {
               <h1>{single.name_Uz}</h1>
               <ul>
                 <li>{single.gender}</li>
-                <li>Rangi: <span>{single.color}</span></li>
-                <li>Sotuvda: <span>{single.active ? "Bor" : "Yo'q"}</span></li>
-                <li>Narxi: <span><h5>{single.discount == 0 ? `${single.price} so'm` : `${Math.floor(single.price - (single.price * single.discount / 100))} so'm`}</h5>
+                <li>{t('modalColor')}: <span>{single.color}</span></li>
+                <li>{t('modalSale')}: <span>{single.active ? "Bor" : "Yo'q"}</span></li>
+                <li>{t('modalPrice')}: <span><h5>{single.discount == 0 ? `${single.price} so'm` : `${Math.floor(single.price - (single.price * single.discount / 100))} so'm`}</h5>
                   <p>{single.discount == 0 ? "" : `${single.price} so'm`}</p></span></li>
-                <li>O'lchami: <span>{single.size}</span></li>
-                <li>Mahsulot turi: <span>{single.type}</span></li>
+                <li>{t('modalSize')}: <span>{single.size}</span></li>
+                <li>{t('modalType')}: <span>{single.type}</span></li>
                 <li>{single.description_Uz}</li>
               </ul>
             </div>

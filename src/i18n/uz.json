@@ -17,5 +17,16 @@
     "message": "XABAR",
     "sent": "Jo'natish",
     "aboutUs": "Biz haqimizda",
-    "cardBtn": "Batafsil ko'rish"
+    "cardBtn": "Batafsil ko'rish",
+    "noItem": "Mahsulotlar mavjud emas :(",
+    "info1": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!",
+    "info2": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!",
+    "info3": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!",
+    "footer1": "© Toshkent - 2023 Barcha huquqlar himoyalangan",
+    "loading": "Yuklanmoqda...",
+    "modalColor": "Rangi",
+    "modalSale": "Sotuvda",
+    "modalPrice": "Narxi",
+    "modalSize": "O'lchami",
+    "modalType": "Mahsulot turi"
 }

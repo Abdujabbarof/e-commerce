@@ -11,9 +11,9 @@ const Card = ({img, name, price, discount, children}) => {
         </div>
 
         <div className={css.text}>
-            <h2 className={darkMode && css.white}>{name}</h2>
+            <h2 className={`${darkMode && css.white}`}>{name}</h2>
             <div className={css.price}>
-                <h3 className={darkMode && css.silver}>{discount == 0 ? `${price} so'm` : `${Math.floor(price - (price * discount / 100))} so'm`}</h3>
+                <h3 className={`${darkMode && css.silver}`}>{discount == 0 ? `${price} so'm` : `${Math.floor(price - (price * discount / 100))} so'm`}</h3>
                 <p>{discount == 0 ? "" : `${price} so'm`}</p>
             </div>
             <div className={css.btns}>

@@ -12,7 +12,7 @@ const Navbar = ({tg, ig}) => {
     <header className={`${darkMode && css.darkMode}`}>
         <div className={`container ${css.container}`}>
             <Link to='/'>
-                <p className={`${darkMode && css.color}`}>LOGO</p>
+                <p className={`${darkMode && css.color}`}>PODARKI</p>
             </Link>
 
             <input type="checkbox" id='checkbox' />

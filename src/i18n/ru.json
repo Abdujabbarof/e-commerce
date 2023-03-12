@@ -17,5 +17,11 @@
     "message": "СООБЩЕНИЕ",
     "sent": "Отправить",
     "aboutUs": "О нас",
-    "cardBtn": "Узнать больше"
+    "cardBtn": "Узнать больше",
+    "noItem": "Hет продукта :(",
+    "info1": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!",
+    "info2": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!",
+    "info3": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!",
+    "footer1": "© Tashkent - 2023 Все права защищены",
+    "loading": "Загрузка..."
 }

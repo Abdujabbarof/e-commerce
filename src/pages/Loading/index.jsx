@@ -1,12 +1,14 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useModal } from '../../utils/useModal'
 import css from './loading.module.scss'
 
 const Loading = () => {
   const {darkMode} = useModal()
+  const {t} = useTranslation()
 
   return (
-    <div className={`${css.loading} ${darkMode && css.darkMode}`}>Yuklanmoqda...</div>
+    <div className={`${css.loading} ${darkMode && css.darkMode}`}>{t('loading')}</div>
   )
 }
 
