@@ -8,7 +8,6 @@
     "search": "Qidiruv...",
     "categories": "Kategoriyalar",
     "categBtn": "Barchasi",
-    "categBt1": "Barchasi",
     "categBtn2": "Qisqartirish",
     "contactUs": "Biz bilan bog'lanish",
     "info": "Bizga so'rovingizni yuboring va biz imkon qadar tezroq siz bilan bog'lanamiz",
@@ -28,5 +27,9 @@
     "modalSale": "Sotuvda",
     "modalPrice": "Narxi",
     "modalSize": "O'lchami",
-    "modalType": "Mahsulot turi"
+    "modalType": "Mahsulot turi",
+    "bor": "Bor",
+    "yoq": "Yo'q",
+    "themes": "Tema",
+    "langs": "TIl"
 }

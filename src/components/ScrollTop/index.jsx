@@ -4,7 +4,8 @@ import {useModal} from '../../utils/useModal'
 
 const ScrollTop = () => {
     const [visible, setVisible] = useState(true)
-    const {darkMode} = useModal()
+    // const {darkMode} = useModal()
+    const darkMode = JSON.parse(localStorage.getItem('darkMode'))
 
     const handleScroll = () => {
         if(window.pageYOffset) {

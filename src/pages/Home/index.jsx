@@ -18,7 +18,8 @@ import { useTranslation } from 'react-i18next'
 const {TextArea} = Input
 
 const Home = () => {
-  const {visible, setVisible, darkMode} = useModal()
+  const {visible, setVisible, langRu} = useModal()
+  const darkMode = JSON.parse(localStorage.getItem('darkMode'))
   const [searchParams, setSearchParam] = useSearchParams()
   const [data, setData] = useState([])
   const [isloading, setIsloading] = useState(true)
@@ -85,7 +86,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar tg={query2?.data?.data?.data?.telegram} ig={query2?.data?.data?.data?.instagram} />
+      <Navbar tg={query2?.data?.data?.data[0].telegram} ig={query2?.data?.data?.data[0].instagram} />
 
       {contextHolder}
 
@@ -110,9 +111,9 @@ const Home = () => {
           <h1 className={styles.title}>{t('categories')}</h1>
           <div className={styles.wrap}>
             <div className={styles.link}>
-              <Button border='silver' text='Barchasi' onClick={() => setSearchParam({})} className={`${styles.btn}`}>{t('categBtn1')}</Button>
+              <Button border='silver' text={t('categBtn')} onClick={() => setSearchParam({})} className={`${styles.btn}`}></Button>
               {
-                query1?.map(item => <Button text={item.name_Uz} value={item.id} key={item.id} onClick={setParam} className={styles.links} border='silver' />)
+                query1?.map(item => <Button text={langRu == "uz" ? item.name_Uz : item.name_Ru} value={item.id} key={item.id} onClick={setParam} className={styles.links} border='silver' />)
               }
             </div>
           </div>
@@ -120,8 +121,8 @@ const Home = () => {
           <div className={styles.cards}>
             {
                showAll ? filtered?.slice(0, 8).map((data) => (
-                <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'  /></Card>)) : filtered?.map((data) => (
-                  <Card id={data.id} key={data.id} name={data.name_Uz} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'/></Card>
+                <Card id={data.id} key={data.id} name={langRu == "uz" ? data.name_Uz : data.name_Ru} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'  /></Card>)) : filtered?.map((data) => (
+                  <Card id={data.id} key={data.id} name={langRu == "uz" ? data.name_Uz : data.name_Ru} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'/></Card>
                 ))
             }
           </div>
@@ -143,8 +144,14 @@ const Home = () => {
 
             <div className={styles.info}>
               <Link className={`${darkMode && styles.white}`}><i class="fa-solid fa-location-dot"></i>{query2.isFetched && query2?.data?.data?.data[0]?.address}</Link>
-              <Link className={`${darkMode && styles.white}`} to={`tel:${query2.isFetched && query2?.data?.data?.data[0]?.phone[0]}`}><i class="fa-solid fa-phone"></i> {query2.isFetched && query2?.data?.data?.data[0].phone[0]}</Link>
-              <Link className={`${darkMode && styles.white}`} to={`mailto:${query2.isFetched && query2?.data?.data?.data[0].email}`}><i class="fa-solid fa-envelope"></i>{query2.isFetched && query2?.data?.data?.data[0].email}</Link>
+
+              {
+                query2.isFetched && query2?.data?.data?.data[0]?.phone?.slice(0, 3).map(num => (
+                  <Link key={num} className={`${darkMode && styles.white}`} to={`tel:${num}`}><i class="fa-solid fa-phone"></i> {num}</Link>
+                ))
+              }
+              {/* <Link className={`${darkMode && styles.white}`} to={`tel:${query2.isFetched && query2?.data?.data?.data[0]?.phone[0]}`}><i class="fa-solid fa-phone"></i> {query2.isFetched && query2?.data?.data?.data[0].phone[0]}</Link> */}
+              <Link className={`${darkMode && styles.white}`} to={`mailto:${query2.isFetched && query2?.data?.data?.data[0]?.email}`}><i class="fa-solid fa-envelope"></i>{query2.isFetched && query2?.data?.data?.data[0]?.email}</Link>
             </div>
           </div>
 
@@ -196,7 +203,7 @@ const Home = () => {
             <Button text={`${t('sent')}`} type='secondary' radius event='submit' />
           </Form>
 
-          {parse(query2.isFetched && query2?.data?.data?.data[0].addressMap)}
+          {parse(query2.isFetched && query2?.data?.data?.data[0]?.addressMap)}
         </div>
       </section>
 
@@ -217,16 +224,16 @@ const Home = () => {
             </div>
 
             <div className={styles.right}>
-              <h1>{single.name_Uz}</h1>
+              <h1>{langRu == "uz" ? single.name_Uz : single.name_Ru}</h1>
               <ul>
                 <li>{single.gender}</li>
                 <li>{t('modalColor')}: <span>{single.color}</span></li>
-                <li>{t('modalSale')}: <span>{single.active ? "Bor" : "Yo'q"}</span></li>
+                <li>{t('modalSale')}: <span>{single.active ? `${t('bor')}` : `${t('yoq')}`}</span></li>
                 <li>{t('modalPrice')}: <span><h5>{single.discount == 0 ? `${single.price} so'm` : `${Math.floor(single.price - (single.price * single.discount / 100))} so'm`}</h5>
                   <p>{single.discount == 0 ? "" : `${single.price} so'm`}</p></span></li>
                 <li>{t('modalSize')}: <span>{single.size}</span></li>
                 <li>{t('modalType')}: <span>{single.type}</span></li>
-                <li>{single.description_Uz}</li>
+                <li>{langRu == "uz" ? single.description_Uz : single.description_Ru}</li>
               </ul>
             </div>
           </div>

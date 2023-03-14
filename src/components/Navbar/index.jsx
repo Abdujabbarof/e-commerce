@@ -5,14 +5,15 @@ import { useModal } from '../../utils/useModal'
 import { useTranslation } from 'react-i18next'
 
 const Navbar = ({tg, ig}) => {
-    const {darkMode} = useModal()
+    // const {darkMode} = useModal()
+    const darkMode = JSON.parse(localStorage.getItem('darkMode'))
     const {t} = useTranslation()
 
   return (
     <header className={`${darkMode && css.darkMode}`}>
         <div className={`container ${css.container}`}>
             <Link to='/'>
-                <p className={`${darkMode && css.color}`}>PODARKI</p>
+                <p className={`${darkMode && css.color}`}>LOGO</p>
             </Link>
 
             <input type="checkbox" id='checkbox' />

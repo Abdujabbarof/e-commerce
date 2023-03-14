@@ -1,22 +1,29 @@
 import { Select, Switch } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useModal } from '../../utils/useModal'
 import css from './settings.module.scss'
 
 const Settings = () => {
-    const { setDarkMode, darkMode, setLangRu, langRu } = useModal()
-    const {i18n} = useTranslation()
+    const { setDarkMode, setLangRu, langRu } = useModal()
+    const darkMode = JSON.parse(localStorage.getItem('darkMode'))
+    const {t,i18n} = useTranslation()
     
     const handleCheck = (checked) => {
+        const newMode = checked
         setDarkMode(checked)
+        localStorage.setItem('darkMode', JSON.stringify(newMode))
     } 
-
+    
     const handeLang = (value) => {
-        i18n.changeLanguage(value)
+        localStorage.setItem('lang', value)
         setLangRu(value)
     }
-
+    
+    useEffect(() => {
+        i18n.changeLanguage((localStorage.getItem('lang')))
+    }, [langRu])
+    
   return (
     <>
         <input type="checkbox" id='settings' />
@@ -25,10 +32,10 @@ const Settings = () => {
                 <i class="fa-solid fa-gear"></i>
             </label>
             <div className={`${css.main} ${darkMode && css.darkMode}`}>
-                <h1 className={`${darkMode && css.white}`}>Theme</h1>
-                <Switch onChange={handleCheck} />
-                <h1 className={`${darkMode && css.white}`}>Langs</h1>
-                <Select defaultValue={'uz'} onChange={handeLang} options={[
+                <h1 className={`${darkMode && css.white}`}>{t('themes')}</h1>
+                <Switch onChange={handleCheck} checked={darkMode} />
+                <h1 className={`${darkMode && css.white}`}>{t('langs')}</h1>
+                <Select defaultValue={langRu} onChange={handeLang} options={[
                     { value: 'uz', label: 'Uz' },
                     { value: 'ru', label: 'Ru' },
                 ]} />

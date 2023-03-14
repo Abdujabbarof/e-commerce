@@ -8,7 +8,6 @@
     "search": "Поиск...",
     "categories": "Категории",
     "categBtn": "Все",
-    "categBt1": "Все",
     "categBtn2": "Mеньше",
     "contactUs": "Cвязаться с нами",
     "info": "Отправьте нам свой запрос, и мы свяжемся с вами как можно скорее",
@@ -23,5 +22,14 @@
     "info2": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!",
     "info3": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eaque sequi doloribus suscipit minus consequuntur explicabo sint consequatur a rem, perspiciatis soluta iusto placeat asperiores laborum dolor modi id similique dolore quaerat, quam eligendi vel!",
     "footer1": "© Tashkent - 2023 Все права защищены",
-    "loading": "Загрузка..."
+    "loading": "Загрузка...",
+    "modalColor": "Цвет",
+    "modalSale": "В продаже",
+    "modalPrice": "Цена",
+    "modalSize": "Размер",
+    "modalType": "Тип продукта",
+    "bor": "Есть",
+    "yoq": "Нет",
+    "themes": "Тема",
+    "langs": "Язык"
 }

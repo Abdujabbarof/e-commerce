@@ -3,7 +3,8 @@ import { useModal } from '../../utils/useModal'
 import css from './card.module.scss'
 
 const Card = ({img, name, price, discount, children}) => {
-    const {darkMode} = useModal()
+    // const {darkMode} = useModal()
+    const darkMode = JSON.parse(localStorage.getItem('darkMode'))
   return (
     <div className={`${css.card} ${darkMode && css.darkMode}`}>
         <div className={css.img}>
