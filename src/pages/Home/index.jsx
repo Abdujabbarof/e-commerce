@@ -121,8 +121,8 @@ const Home = () => {
           <div className={styles.cards}>
             {
                showAll ? filtered?.slice(0, 8).map((data) => (
-                <Card id={data.id} key={data.id} name={langRu == "uz" ? data.name_Uz : data.name_Ru} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'  /></Card>)) : filtered?.map((data) => (
-                  <Card id={data.id} key={data.id} name={langRu == "uz" ? data.name_Uz : data.name_Ru} price={data.price} discount={data.discount} img={`http://3.19.30.204/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'/></Card>
+                <Card id={data.id} key={data.id} name={langRu == "uz" ? data.name_Uz : data.name_Ru} price={data.price} discount={data.discount} img={`http://3.138.204.20/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'  /></Card>)) : filtered?.map((data) => (
+                  <Card id={data.id} key={data.id} name={langRu == "uz" ? data.name_Uz : data.name_Ru} price={data.price} discount={data.discount} img={`http://3.138.204.20/upload/${data?.photo?.path}`}><Button text={`${t('cardBtn')}`} onClick={() => [setVisible(true), fetch(data.id)]} broder type='secondary'/></Card>
                 ))
             }
           </div>
@@ -220,7 +220,7 @@ const Home = () => {
         <div className={`${styles.wrapper}`}>
           <div className={styles.modal}>
             <div className={styles.left}>
-              <img src={`http://3.19.30.204/upload/${single?.photo?.path}`}/>
+              <img src={`http://3.138.204.20/upload/${single?.photo?.path}`}/>
             </div>
 
             <div className={styles.right}>
