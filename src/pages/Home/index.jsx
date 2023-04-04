@@ -128,7 +128,7 @@ const Home = () => {
           </div>
 
           <div className={styles.btns}>
-            {filtered.length !== 0 ? <Button onClick={showAllProduct} text={`${showAll ? `${t('categBtn2')}` : `${t('categBtn')}`}`} border='silver' /> : <h1 className={`${darkMode && styles.white}`}>{t('noItem')}</h1>}
+            {filtered.length !== 0 ? filtered.length > 8  && <Button onClick={showAllProduct} text={`${showAll ? `${t('categBtn2')}` : `${t('categBtn')}`}`} border='silver' /> : <h1 className={`${darkMode && styles.white}`}>{t('noItem')}</h1>}
           </div>
         </div>
       </section>
